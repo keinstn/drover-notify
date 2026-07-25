@@ -1,0 +1,37 @@
+# drover-notify
+
+A Herdr plugin (id `drover.notify`) that sends a push notification to the Drover iOS app
+when an agent in a Herdr pane becomes blocked. It listens for `pane.agent_status_changed`
+events and notifies only on the `blocked` status — it does not send anything for `done`
+events.
+
+## Requirements
+
+- Herdr 0.7.0+
+- Node.js 18+
+
+The plugin has zero npm dependencies (only Node built-ins), so it needs no `npm install`
+step on the host.
+
+## Install
+
+This repository is currently private, so `herdr plugin install keinstn/drover-notify`
+(which does an unauthenticated `git clone`) will not work yet. Until the repo is made
+public, install it manually on the Herdr host:
+
+```sh
+git clone git@github.com:keinstn/drover-notify.git
+herdr plugin link /path/to/drover-notify
+```
+
+Once the repo is public, `herdr plugin install keinstn/drover-notify` will be the
+one-line install path instead.
+
+## Pairing
+
+Pairing is normally driven from the Drover app: open host settings and choose
+"Create notification pairing code". For the manual pairing path on the host, run
+`bin/setup.mjs` (interactive) or `bin/pair.mjs` (reads the pairing code from stdin).
+
+See `docs/push-notifications.md` in the `drover` repo for the full pairing and
+notification flow.
