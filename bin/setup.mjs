@@ -40,6 +40,10 @@ async function readPairingCode() {
       process.stdin.setRawMode(false);
       process.stdin.pause();
     };
+    // Raw mode hands over every byte unfiltered and echoes nothing, so this
+    // loop has to do what the terminal normally would. Anything it fails to
+    // recognise lands in the code invisibly: pressing an arrow key used to
+    // append "\u001b[A" and the user only found out when pairing failed.
     const onData = (input) => {
       for (const character of input) {
         if (state === afterEscapeState) {
@@ -74,6 +78,10 @@ async function readPairingCode() {
           code = code.slice(0, -1);
           continue;
         }
+        // Single control bytes the branches above did not consume, e.g.
+        // Ctrl+U (\u0015), which a user may press expecting it to clear the
+        // line. Allowing only printable characters keeps unknown keys out
+        // too -- the pairing code never contains a control character.
         if (character < " ") continue;
         code += character;
       }
