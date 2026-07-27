@@ -19,7 +19,7 @@ const completionUrl = option("--completion-url");
 const configDir = option("--config-dir");
 if (completionUrl == null || configDir == null) {
   throw new Error(
-    "Usage: pair.mjs --completion-url <url> --config-dir <dir> < pairing-code.txt",
+    "Usage: node bin/pair.mjs --completion-url <url> --config-dir <dir>, with the pairing code on standard input.",
   );
 }
 

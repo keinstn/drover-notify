@@ -16,7 +16,7 @@ export async function loadConfig(configDir) {
   } catch (error) {
     if (error?.code === "ENOENT") {
       throw new Error(
-        `Drover Notify is not paired. Run bin/pair.mjs with --config-dir ${configDir}.`,
+        `Drover Notify is not paired. Run node bin/pair.mjs with --config-dir ${configDir}.`,
       );
     }
     throw error;
