@@ -7,19 +7,11 @@ events.
 
 ## Requirements
 
-- Herdr 0.7.0+
+- Herdr 0.7.0+ (native Windows support is preview/beta)
 - Node.js 18+
 
 The plugin has zero npm dependencies (only Node built-ins), so it needs no `npm install`
 step on the host.
-
-Herdr's native Windows support is preview/beta only. Stable Herdr binaries ship for Linux
-and macOS; Windows binaries (`herdr-windows-x86_64.zip`) are published only on preview
-prereleases, and are installed with:
-
-```powershell
-powershell -ExecutionPolicy Bypass -c "irm https://herdr.dev/install.ps1 | iex"
-```
 
 ## Install
 
