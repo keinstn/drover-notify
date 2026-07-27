@@ -7,6 +7,14 @@ import { completePairing } from "../src/notification-client.mjs";
 
 const execFileAsync = promisify(execFile);
 
+// Escape-sequence parser states for readPairingCode(). "after-escape" is
+// distinct from "in-sequence" because the introducer "[" is itself inside
+// the @-~ range that terminates a sequence, so terminator checks must not
+// start until the introducer has been consumed.
+const textState = "text";
+const afterEscapeState = "after-escape";
+const inSequenceState = "in-sequence";
+
 function option(name) {
   const index = process.argv.indexOf(name);
   return index === -1 ? null : process.argv[index + 1] ?? null;
@@ -26,7 +34,7 @@ async function readPairingCode() {
 
   return new Promise((resolve, reject) => {
     let code = "";
-    let escape = 0;
+    let state = textState;
     const cleanup = () => {
       process.stdin.off("data", onData);
       process.stdin.setRawMode(false);
@@ -34,16 +42,21 @@ async function readPairingCode() {
     };
     const onData = (input) => {
       for (const character of input) {
-        if (escape === 1) {
-          escape = character === "[" || character === "O" ? 2 : 0;
+        if (state === afterEscapeState) {
+          // CSI ("[") and SS3 ("O") both run to an @-~ terminator; any
+          // other character is a complete two-character sequence.
+          state =
+            character === "[" || character === "O"
+              ? inSequenceState
+              : textState;
           continue;
         }
-        if (escape === 2) {
-          if (character >= "@" && character <= "~") escape = 0;
+        if (state === inSequenceState) {
+          if (character >= "@" && character <= "~") state = textState;
           continue;
         }
         if (character === "\u001b") {
-          escape = 1;
+          state = afterEscapeState;
           continue;
         }
         if (character === "\r" || character === "\n") {
