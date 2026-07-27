@@ -26,6 +26,7 @@ async function readPairingCode() {
 
   return new Promise((resolve, reject) => {
     let code = "";
+    let escape = 0;
     const cleanup = () => {
       process.stdin.off("data", onData);
       process.stdin.setRawMode(false);
@@ -33,6 +34,18 @@ async function readPairingCode() {
     };
     const onData = (input) => {
       for (const character of input) {
+        if (escape === 1) {
+          escape = character === "[" || character === "O" ? 2 : 0;
+          continue;
+        }
+        if (escape === 2) {
+          if (character >= "@" && character <= "~") escape = 0;
+          continue;
+        }
+        if (character === "\u001b") {
+          escape = 1;
+          continue;
+        }
         if (character === "\r" || character === "\n") {
           cleanup();
           process.stdout.write("\n");
@@ -48,6 +61,7 @@ async function readPairingCode() {
           code = code.slice(0, -1);
           continue;
         }
+        if (character < " ") continue;
         code += character;
       }
     };
