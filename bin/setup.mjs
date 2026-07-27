@@ -61,9 +61,10 @@ if (completionUrl == null) {
 }
 
 const configuredHerdrBin = option("--herdr-bin") ?? process.env.HERDR_BIN_PATH ?? "herdr";
+const homeDir = process.env.HOME ?? process.env.USERPROFILE;
 const herdrBin =
-  configuredHerdrBin.startsWith("~/") && typeof process.env.HOME === "string"
-    ? `${process.env.HOME}/${configuredHerdrBin.slice(2)}`
+  configuredHerdrBin.startsWith("~/") && typeof homeDir === "string"
+    ? `${homeDir}/${configuredHerdrBin.slice(2)}`
     : configuredHerdrBin;
 const { stdout } = await execFileAsync(herdrBin, [
   "plugin",

@@ -13,6 +13,14 @@ events.
 The plugin has zero npm dependencies (only Node built-ins), so it needs no `npm install`
 step on the host.
 
+Herdr's native Windows support is preview/beta only. Stable Herdr binaries ship for Linux
+and macOS; Windows binaries (`herdr-windows-x86_64.zip`) are published only on preview
+prereleases, and are installed with:
+
+```powershell
+powershell -ExecutionPolicy Bypass -c "irm https://herdr.dev/install.ps1 | iex"
+```
+
 ## Install
 
 This repository is currently private, so `herdr plugin install keinstn/drover-notify`
@@ -31,7 +39,13 @@ one-line install path instead.
 
 Pairing is normally driven from the Drover app: open host settings and choose
 "Create notification pairing code". For the manual pairing path on the host, run
-`bin/setup.mjs` (interactive) or `bin/pair.mjs` (reads the pairing code from stdin).
+`node bin/setup.mjs` (interactive) or `node bin/pair.mjs` (reads the pairing code from
+stdin). Invoking them through `node` works on every platform; the `./bin/setup.mjs`
+shebang form is Unix-only.
+
+Pairing writes the config file with POSIX mode 0600 on Linux and macOS. On Windows those
+permission bits do not apply, and the file is protected by the `%APPDATA%` user-profile
+ACL instead.
 
 See `docs/push-notifications.md` in the `drover` repo for the full pairing and
 notification flow.
