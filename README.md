@@ -15,17 +15,16 @@ step on the host.
 
 ## Install
 
-This repository is currently private, so `herdr plugin install keinstn/drover-notify`
-(which does an unauthenticated `git clone`) will not work yet. Until the repo is made
-public, install it manually on the Herdr host:
-
 ```sh
-git clone git@github.com:keinstn/drover-notify.git
-herdr plugin link /path/to/drover-notify
+herdr plugin install keinstn/drover-notify
 ```
 
-Once the repo is public, `herdr plugin install keinstn/drover-notify` will be the
-one-line install path instead.
+Or clone and link it manually:
+
+```sh
+git clone https://github.com/keinstn/drover-notify.git
+herdr plugin link /path/to/drover-notify
+```
 
 ## Pairing
 
@@ -41,3 +40,7 @@ ACL instead.
 
 See `docs/push-notifications.md` in the `drover` repo for the full pairing and
 notification flow.
+
+## License
+
+MIT — see [`LICENSE`](LICENSE).
