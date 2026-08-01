@@ -1,6 +1,7 @@
 # drover-notify
 
-A Herdr plugin (id `drover.notify`) that sends a push notification to the Drover iOS app
+A Herdr plugin (id `drover.notify`) that sends a push notification to the
+[Drover](https://github.com/keinstn/drover) iOS app
 when an agent in a Herdr pane becomes blocked. It listens for `pane.agent_status_changed`
 events and notifies only on the `blocked` status — it does not send anything for `done`
 events.
@@ -38,8 +39,8 @@ Pairing writes the config file with POSIX mode 0600 on Linux and macOS. On Windo
 permission bits do not apply, and the file is protected by the `%APPDATA%` user-profile
 ACL instead.
 
-See `docs/push-notifications.md` in the `drover` repo for the full pairing and
-notification flow.
+See [`docs/push-notifications.md`](https://github.com/keinstn/drover/blob/main/docs/push-notifications.md)
+in the `drover` repo for the full pairing and notification flow.
 
 ## License
 
