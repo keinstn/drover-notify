@@ -2,9 +2,9 @@
 
 A Herdr plugin (id `drover.notify`) that sends a push notification to the
 [Drover](https://github.com/keinstn/drover) iOS app
-when an agent in a Herdr pane becomes blocked. It listens for `pane.agent_status_changed`
-events and notifies only on the `blocked` status — it does not send anything for `done`
-events.
+when an agent in a Herdr pane becomes blocked or finishes. It listens for
+`pane.agent_status_changed` events and notifies on the `blocked` and `done`
+statuses only.
 
 ## Requirements
 

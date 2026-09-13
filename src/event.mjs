@@ -1,4 +1,4 @@
-export function blockedEventFromEnvironment(environment) {
+export function statusEventFromEnvironment(environment) {
   const raw = environment.HERDR_PLUGIN_EVENT_JSON;
   if (typeof raw !== "string") {
     throw new Error("HERDR_PLUGIN_EVENT_JSON is not set.");
@@ -14,7 +14,7 @@ export function blockedEventFromEnvironment(environment) {
   if (
     event?.event !== "pane_agent_status_changed" ||
     data?.type !== "pane_agent_status_changed" ||
-    data?.agent_status !== "blocked" ||
+    (data?.agent_status !== "blocked" && data?.agent_status !== "done") ||
     typeof data?.pane_id !== "string" ||
     data.pane_id.length === 0
   ) {
@@ -26,5 +26,5 @@ export function blockedEventFromEnvironment(environment) {
       : typeof data.agent === "string"
         ? data.agent
         : undefined;
-  return { paneId: data.pane_id, agentName };
+  return { paneId: data.pane_id, agentName, status: data.agent_status };
 }

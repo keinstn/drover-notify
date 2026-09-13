@@ -27,6 +27,7 @@ export async function sendBlockedNotification(config, event) {
     hostId: config.hostId,
     paneId: event.paneId,
     eventId: event.eventId,
+    status: event.status,
     ...(event.agentName == null ? {} : { agentName: event.agentName }),
   };
   let lastError;
