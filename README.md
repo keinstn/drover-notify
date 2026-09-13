@@ -8,7 +8,7 @@ statuses only.
 
 ## Requirements
 
-- Herdr 0.7.0+ (native Windows support is preview/beta)
+- Herdr 0.8.0+ (native Windows support is preview/beta)
 - Node.js 18+
 
 The plugin has zero npm dependencies (only Node built-ins), so it needs no `npm install`
