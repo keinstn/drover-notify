@@ -1,8 +1,8 @@
 id = "drover.notify"
 name = "Drover Notify"
-version = "0.1.0"
-min_herdr_version = "0.7.0"
-description = "Sends Drover notifications when an agent becomes blocked."
+version = "0.2.0"
+min_herdr_version = "0.8.0"
+description = "Sends Drover notifications when an agent becomes blocked or done."
 platforms = ["linux", "macos", "windows"]
 
 [[events]]

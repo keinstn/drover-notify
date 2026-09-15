@@ -2,10 +2,10 @@
 import { randomUUID } from "node:crypto";
 
 import { loadConfig } from "../src/config.mjs";
-import { blockedEventFromEnvironment } from "../src/event.mjs";
+import { statusEventFromEnvironment } from "../src/event.mjs";
 import { sendBlockedNotification } from "../src/notification-client.mjs";
 
-const event = blockedEventFromEnvironment(process.env);
+const event = statusEventFromEnvironment(process.env);
 if (event == null) process.exit(0);
 
 const configDir = process.env.HERDR_PLUGIN_CONFIG_DIR;
