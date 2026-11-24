@@ -1,5 +1,12 @@
 # drover-notify
 
+> [!WARNING]
+> **Deprecated.** This project is no longer maintained. Drover itself is
+> retired; if you use herdr-core (the Herdr app), use the official
+> [Herdr mobile app](https://herdr.dev/mobile/) instead. Drover's push
+> notification service stops on 2026-12-01, after which this plugin no longer
+> delivers anything and can be uninstalled.
+
 A Herdr plugin (id `drover.notify`) that sends a push notification to the
 [Drover](https://github.com/keinstn/drover) iOS app
 when an agent in a Herdr pane becomes blocked or finishes. It listens for
